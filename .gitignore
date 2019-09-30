@@ -32,3 +32,4 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 JamDrive_Graph_client.code-workspace
+package-lock.json
