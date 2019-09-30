@@ -13,7 +13,9 @@
 
 # misc
 .DS_Store
+.env
 .env.local
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local
@@ -21,3 +23,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+JamDrive_Graph_client.code-workspace
