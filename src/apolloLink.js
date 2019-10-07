@@ -11,26 +11,22 @@ import {
   import {
     HttpLink
   } from 'apollo-link-http';
-  
-  
   import {
     onError
   } from 'apollo-link-error';
-  import history from './history';
   import {
     setContext
   } from 'apollo-link-context';
+import history from './utils/history';
   
   require('dotenv').config()
-  
-  
-  
-  
   const wsLink = new WebSocketLink({
     uri: process.env.REACT_APP_WEBSOCKET_LINK,
     options: {
       reconnect: true,
       timeout: 30000,
+      inactivityTimeout: 3000,
+      lazy:true,
       connectionParams: {
   
       authorization: localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN) ? `Bearer ${localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN)}` : null,
