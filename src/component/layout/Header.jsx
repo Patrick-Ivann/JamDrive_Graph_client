@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { withRouter } from "react-router-dom";
-import { changerTheme } from "../../actions/themeAction";
-import { navigatorCheck } from '../../utils/functionSheet';
+import { navigatorCheck } from '../../utils/helpers';
+
 
 export default function Header() {
 
@@ -10,7 +9,7 @@ export default function Header() {
 
 
     let fileImg = null;
-    (navigatorCheck() === "Safari" || navigatorCheck() === "IE" || navigatorCheck() === "unknown") ? fileImg = require("../../static/image/jampops.png") : fileImg = require("../../static/image/jampops.webp")
+    (navigatorCheck() === "Safari" || navigatorCheck() === "IE" || navigatorCheck() === "unknown") ? fileImg = `${process.env.REACT_APP_ADRESS}/static/images/jampops.png` : fileImg = `${process.env.REACT_APP_ADRESS}/static/images/jampops.webp`
 
 
     return (
@@ -30,11 +29,11 @@ export default function Header() {
                         <label aria-label="recherche" id="lblRecherche" htmlFor="recherche"> &nbsp;</label>
 
                         <input className="form-control mr-sm-2" id="recherche" name='recherche' value={recherche}
-                            onChange={this.handleChange} type="search" placeholder="Recherche.." />
+                            onChange={setRecherche} type="search" placeholder="Recherche.." />
                     </form>
 
-                    <button className="btn btn-primary my-2 mr-2 my-sm-0" data-toggle="modal" data-target="#fileModal">Nouveau prosit</button>
-                    <button className="btn btn-secondary my-2 my-sm-0" onClick={this.props.changerTheme}>Thème {(this.props.theme.theme) ? "clair" : "sombre"} </button>
+                    {/* <button className="btn btn-primary my-2 mr-2 my-sm-0" data-toggle="modal" data-target="#fileModal">Nouveau prosit</button> */}
+                    {/* <button className="btn btn-secondary my-2 my-sm-0" onClick={this.props.changerTheme}>Thème {(this.props.theme.theme) ? "clair" : "sombre"} </button> */}
                 </div>
             </nav>
         </header>
