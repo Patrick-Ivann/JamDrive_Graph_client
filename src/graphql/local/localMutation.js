@@ -14,3 +14,24 @@ export const STORE_MUTATION_USER = gql `mutation setConnection( $user: String) {
     ) @client
   }
   `
+export const STORE_MUTATION_FILTER =gql`
+
+mutation setFilterWord($word:String){
+
+  setFilterWord(
+    word:$word
+  )@client
+}
+`
+
+export const STORE_MUTATION_THEME=gql`
+
+mutation setTheme{
+  setTheme@client
+}
+
+`
+
+
+
+
