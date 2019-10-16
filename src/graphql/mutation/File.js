@@ -21,8 +21,8 @@ mutation($file: Upload!, $title:String!,$nom:String!,$prositId:ID!){
 `
 export const UPLOAD_ELEVE_RESSOURCE=gql`
 
-mutation($file:Upload!, $title:String!,$nom:String!,$nom:String!){
-    UploadEleveRessource(file:$file,title:$title,nom:$nom){
+mutation($file:Upload!, $title:String!,$nom:String!, $prositId:ID!, $unite:String!){
+    UploadEleveRessource(file:$file,title:$title,nom:$nom, prositId: $prositId, unite:$unite){
         id
         title
         path
@@ -37,8 +37,8 @@ mutation($file:Upload!, $title:String!,$nom:String!,$nom:String!){
 
 export const UPLOAD_PROF_RESSOURCE=gql`
 
-mutation($file:Upload!, $title:String!, $nom:String!){
-    UploadProfRessource(file:$file,title:$title,nom:$nom){
+mutation($file:Upload!, $title:String!, $nom:String!,$prositId:ID!, $unite:String!){
+    UploadProfRessource(file:$file,title:$title,nom:$nom,prositId: $prositId, unite:$unite){
         id
         title
         path

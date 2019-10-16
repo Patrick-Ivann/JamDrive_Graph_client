@@ -27,6 +27,7 @@ import history from '../../utils/history';
  */
 export const useLogin = () => {
   const [submitLogin] = useMutation(LOGIN_MUTATE)
+  const [setUser] = useMutation(STORE_MUTATION_USER)
   /**
    * @param {String} password
    * @param {Function} callback
@@ -43,6 +44,11 @@ export const useLogin = () => {
     }).then((res) => {
       localStorage.setItem(process.env.REACT_APP_LOCAL_TOKEN, res.data.loginUser.token)
       localStorage.setItem(process.env.REACT_APP_LOCAL_REFRESH_TOKEN, res.data.loginUser.refreshToken)
+      setUser({
+        variables:res.data.loginUser.user
+      })
+
+      //TODO check for res.data.loginUser.user.role to push to the right route
       history.push("/feed")
     }).catch(e => {
       console.error(e)

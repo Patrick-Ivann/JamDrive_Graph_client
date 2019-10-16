@@ -38,8 +38,6 @@ export default function PrositFormIndex(props) {
     return (
         <div>
             <form action="">
-
-
                 <input type="text" required onChange={updateField} placeholder="nom du Prosit" name='nomProsit' value={form.nomProsit} />
                 <input type="text" required onChange={updateField} placeholder="unite du prosit" name='unite' value={form.unite} />
                 <input type="text" required onChange={updateField} placeholder="liste des mots clef à separer par des virgules" name='motsClef' value={form.motsClef} />

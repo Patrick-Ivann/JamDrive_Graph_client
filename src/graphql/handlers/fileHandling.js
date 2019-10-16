@@ -59,67 +59,83 @@ export const useUpload = () => {
         title,
         nomProsit,
         unite,
-        motsClef
+        motsClef,
+        prositId
     }, callback) => {
 
         //TODO EXTRACT FILE TITLE FROM FILE VARIABLE
         //TODO EXTRACT FILE TYPE(ALLER || RETOUR || RESSOURCE)FROM TITLE
 
-        let err, prositData;
-        [err, prositData] = await to(submitPrositCreation({
-            variables: {
-                nomProsit,
-                unite,
-                motsClef
+        if (motsClef) {
+
+            let err, prositData;
+            [err, prositData] = await to(submitPrositCreation({
+                variables: {
+                    nomProsit,
+                    unite,
+                    motsClef
+                }
+            }));
+            console.log(err)
+            if (err) console.log(err);
+            console.log(prositData)
+            console.log(file)
+            if (isFileRelevant(title) && isFileTypeValid(title) && !err && prositData) {
+                const {
+                    clef,
+                    nom,
+                    spec
+                } = fileNameExtractor(title)
+                if (isFileProsit(clef)) {
+                    if (isFilePrositAller(spec)) {
+
+
+                        return submitPrositAller({
+                            variables: {
+                                file: file,
+                                title,
+                                nom,
+                                prositId: prositData.data.pushProsit._id
+                            }
+                        }).then((result) => {
+                            console.table(result.data);
+
+                        }).catch(e => {
+                            console.error(e)
+                            if (!!callback && isFunction(callback)) callback(e)
+                        })
+
+                    }
+
+                }
+
             }
-        }));
-        console.log(err)
-        if (err) console.log(err);
-        console.log(prositData)
-        console.log(file)
-        if (isFileRelevant(title) && isFileTypeValid(title) && !err && prositData) {
+        }
+        if (isFileRelevant(title) && isFileTypeValid(title)) {
             const {
                 clef,
                 nom,
                 spec
             } = fileNameExtractor(title)
             if (isFileProsit(clef)) {
-                if (isFilePrositAller(spec)) {
+                if (!isFilePrositAller(spec)) {
 
-                    return submitPrositAller({
+                    return submitPrositRetour({
                         variables: {
-                            file: file,
+                            file,
                             title,
                             nom,
-                            prositId: prositData.data.pushProsit._id
+                            prositId: prositId
                         }
                     }).then((result) => {
-                        console.table(result);
+                        console.table(result.data);
+
 
                     }).catch(e => {
                         console.error(e)
                         if (!!callback && isFunction(callback)) callback(e)
                     })
-
                 }
-
-                return submitPrositRetour({
-                    variables: {
-                        file,
-                        title,
-                        nom,
-                        prositId: prositData.data.pushProsit._id
-                    }
-                }).then((result) => {
-                    console.table(result);
-                    console.log(result.data.UploadAllerProsit.id)
-
-                }).catch(e => {
-                    console.error(e)
-                    if (!!callback && isFunction(callback)) callback(e)
-                })
-
-
             }
 
             if (isFileRessourceEleve(spec)) {
@@ -129,12 +145,11 @@ export const useUpload = () => {
                         file,
                         title,
                         nom,
-                        prositId: prositData.data.pushProsit._id
+                        prositId: prositId,
+                        unite:unite
                     }
                 }).then((result) => {
-                    console.table(result);
-                    console.log(result.data.UploadAllerProsit.id)
-
+                    console.table(result.data);
                 }).catch(e => {
                     console.error(e)
                     if (!!callback && isFunction(callback)) callback(e)
@@ -146,18 +161,16 @@ export const useUpload = () => {
                     file,
                     title,
                     nom,
-                    prositId: prositData.data.pushProsit._id
+                    prositId: prositId,
+                    unite
                 }
             }).then((result) => {
                 console.table(result);
-                console.log(result.data.UploadAllerProsit.id)
-
             }).catch(e => {
                 console.error(e)
                 if (!!callback && isFunction(callback)) callback(e)
             })
         }
-
-        // irrelevant file, throw error
     }
+    // irrevelant file throw error
 }
