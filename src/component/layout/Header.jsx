@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
 import { navigatorCheck } from '../../utils/helpers';
+import { LOCAL_FILTERSTORE_QUERY } from '../../graphql/local/localQueries';
+import { useQuery } from 'react-apollo-hooks';
+import { useLayout, useFilter, useTheme } from '../../graphql/handlers/layoutHandling';
 
 
-export default function Header() {
+export default function Header({ themeStore }) {
 
+    const [form, setValues] = useState({
+        filterWord: '',
+    });
 
-    const [recherche, setRecherche] = useState("")
+    const updateField = e => {
+        setValues({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    console.log(themeStore)
+
+    const filter = useFilter();
+    const theme = useTheme();
+    // const filtering = useLayout.submitFilter();
+
 
 
     let fileImg = null;
@@ -27,13 +45,12 @@ export default function Header() {
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
                         <label aria-label="recherche" id="lblRecherche" htmlFor="recherche"> &nbsp;</label>
-
-                        <input className="form-control mr-sm-2" id="recherche" name='recherche' value={recherche}
-                            onChange={setRecherche} type="search" placeholder="Recherche.." />
+                        <input className="form-control mr-sm-2" id="filterWord" name='filterWord' value={form.filterWord}
+                            onChange={updateField} onKeyUp={() => filter({ word: form.filterWord })} type="search" placeholder="Recherche.." />
                     </form>
 
                     {/* <button className="btn btn-primary my-2 mr-2 my-sm-0" data-toggle="modal" data-target="#fileModal">Nouveau prosit</button> */}
-                    {/* <button className="btn btn-secondary my-2 my-sm-0" onClick={this.props.changerTheme}>Thème {(this.props.theme.theme) ? "clair" : "sombre"} </button> */}
+                    <button className="btn btn-secondary my-2 my-sm-0" onClick={() => theme()}>Thème  </button>
                 </div>
             </nav>
         </header>
