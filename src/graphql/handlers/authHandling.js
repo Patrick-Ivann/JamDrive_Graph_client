@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   CURRENT_USER_QUERY
 } from '../queries/Auth';
@@ -20,6 +19,7 @@ import {
   isFunction
 } from 'util';
 import history from '../../utils/history';
+import { defaults } from '../local/defaultState';
 
 /**
  * Custom Hook to request login using graphQl Mutaion, returns a function to pass Parameters to
@@ -45,8 +45,13 @@ export const useLogin = () => {
       localStorage.setItem(process.env.REACT_APP_LOCAL_TOKEN, res.data.loginUser.token)
       localStorage.setItem(process.env.REACT_APP_LOCAL_REFRESH_TOKEN, res.data.loginUser.refreshToken)
       setUser({
-        variables:res.data.loginUser.user
-      })
+        variables: {
+          user: res.data.loginUser.user
+        }
+      }).catch((err) => {
+        console.warn(err)
+      });
+
 
       //TODO check for res.data.loginUser.user.role to push to the right route
       history.push("/feed")
@@ -71,19 +76,32 @@ export const useLogout = () => {
     cacheOnly = false
   } = {}) => {
 
-    submitLogOut({}).then((result) => {
+    return submitLogOut().then((result) => {
       localStorage.removeItem(process.env.REACT_APP_LOCAL_TOKEN)
+      localStorage.removeItem(process.env.REACT_APP_LOCAL_REFRESH_TOKEN)
 
+      client.clearStore().then(() => client.resetStore()).catch((err)=> console.log(err));
+
+      console.log(client)
+      client.onClearStore(()=>{
+          console.log("sdhjsgd")  
+        client.cache.writeData({data : defaults });
+        console.log(client);
+        });
+      
+      
+    
+     /*  console.log(result)
       if (cacheOnly) {
         client.clearStore()
       } else {
         client.resetStore()
-      }
+      } */
       if (callback && isFunction(callback)) {
         callback(null, 'success')
       } else history.push('/')
     }).catch((err) => {
-      console.log(err);
+      console.warn(err);
       if (!!callback && isFunction(callback)) callback(err)
 
     });

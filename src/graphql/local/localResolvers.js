@@ -5,6 +5,7 @@ export const resolvers = {
     
         setConnection: (_,{user}, {cache,getCacheKey }) =>{
             const id = getCacheKey({ __typename: 'UserStore'})
+            console.log(user);
             const data = {
             userStore : {
                 id:id,

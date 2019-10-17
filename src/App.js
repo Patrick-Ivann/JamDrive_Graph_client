@@ -14,24 +14,25 @@ import history from './utils/history';
 import jwt_decode from "jwt-decode";
 import PrositfFeedBloc from './component/PrositFeed/PrositfFeedBloc';
 import HeaderBloc from './component/layout/HeaderBloc';
+import { useLogout } from './graphql/handlers/authHandling';
 
 
 
 
-function App({ client,
-  data,
-  error,
-  loading,
-  networkStatus,
-  called })   {
+// function App({ client,
+//   data,
+//   error,
+//   loading,
+//   networkStatus,
+//   called })   {
+
+function App(props) {
+    const clearUser = useLogout();
 
 useEffect(() => {
-  // console.log(client)
-  // console.log(loading)
-  // console.log(error)
-  // console.log(networkStatus)
-  // console.log(called)
-  // console.log(data)
+
+
+console.log(window.location);
   if (localStorage[process.env.REACT_APP_LOCAL_TOKEN]) {   
     const decoded = jwt_decode(localStorage[process.env.REACT_APP_LOCAL_TOKEN])
     const currentTime = Date.now() / 1000;
@@ -41,16 +42,19 @@ useEffect(() => {
     }
 
   }
+
+  if (window.location.pathname ==="/")  clearUser();
+
   
   return () => {
     console.log("unmount")
   };
-}, [data])
+}, [])
 
 
 
-if (loading) return <div > loading </div>
-if (error) return <div > error </div>
+// if (loading) return <div > loading </div>
+// if (error) return <div > error </div>
 return (
 
       <Router history={history}>
@@ -71,6 +75,8 @@ return (
 
 
 
-export default graphql(CURRENT_USER_QUERY, {
-  options: { fetchPolicy: 'network-only' }
-})(App);
+// export default graphql(CURRENT_USER_QUERY, {
+//   options: { fetchPolicy: 'network-only' }
+// })(App);
+
+export default App

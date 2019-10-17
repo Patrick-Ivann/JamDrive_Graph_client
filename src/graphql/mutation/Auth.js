@@ -17,6 +17,8 @@ loginUser(
 
 
 export const LOGOUT_MUTATE = gql`
-mutation{signOut}
+mutation {
+  logoutUser
+}
 `
 
