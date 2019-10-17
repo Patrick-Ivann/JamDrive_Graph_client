@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { navigatorCheck } from '../../utils/helpers';
-import { LOCAL_FILTERSTORE_QUERY } from '../../graphql/local/localQueries';
-import { useQuery } from 'react-apollo-hooks';
-import { useLayout, useFilter, useTheme } from '../../graphql/handlers/layoutHandling';
+import { useFilter, useTheme } from '../../graphql/handlers/layoutHandling';
 
 
 export default function Header({ themeStore }) {
@@ -18,14 +16,8 @@ export default function Header({ themeStore }) {
         });
     };
 
-    console.log(themeStore)
-
     const filter = useFilter();
     const theme = useTheme();
-    // const filtering = useLayout.submitFilter();
-
-
-
     let fileImg = null;
     (navigatorCheck() === "Safari" || navigatorCheck() === "IE" || navigatorCheck() === "unknown") ? fileImg = `${process.env.REACT_APP_ADRESS}/static/images/jampops.png` : fileImg = `${process.env.REACT_APP_ADRESS}/static/images/jampops.webp`
 
