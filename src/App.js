@@ -1,9 +1,5 @@
 import React,{useEffect} from 'react';
 import { Router, Route, Switch } from "react-router-dom";
-
-
-
-import './App.css';
 // import PrivateRoute from './component/common/PrivateRoute';
 import { graphql } from 'react-apollo';
 import { CURRENT_USER_QUERY } from './graphql/queries/Auth';

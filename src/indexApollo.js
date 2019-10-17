@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/tailwind.css';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import {
@@ -20,6 +20,7 @@ import {
 import { resolvers } from './graphql/local/localResolvers';
 import { defaultLocalAppoloState } from "./graphql/local/defaultState";
 import { terminalLink } from './apolloLink';
+
 
 require('dotenv').config()
 
