@@ -1,18 +1,24 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PrositFormIndex from '../PrositForm/PrositFormIndex';
 import IndivPrositForm from './IndivPrositForm';
 import { filterPrositByNomProsit } from '../../utils/helpers';
 
-const PrositFeedIndex = ({ data, loading, error, filterStore }) => {
+const PrositFeedIndex = ({ data, loading, error, filterStore = "" }) => {
+    const [filtreState, setFiltre] = useState("");
+    useEffect(() => {
+
+        setFiltre(filterStore.filterStore.filterWord)
+
+    }, [filterStore])
+
     if (loading) return <div > loading </div>
     if (error) return <div > error </div>
 
-    let filtre = (filterStore.filterStore.filterWord) ? filterStore.filterStore.filterWord : "";
     return (
         <div>
             <PrositFormIndex></PrositFormIndex>
-            {data.prositsByPromo.filter(prosit => filterStore.filterStore.filterWord && filterPrositByNomProsit(prosit, filtre)).map(prosit => {
+            {data.prositsByPromo.filter(prosit => filterPrositByNomProsit(prosit, filtreState)).map(prosit => {
 
                 return (
                     <div key={`divPrositPromo_${prosit._id}`}>
