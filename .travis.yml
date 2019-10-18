@@ -5,6 +5,5 @@ cache:
   directories:
   - node_modules
 script:
-- npm build:css
 - npm test
 - CI=false npm run build 
