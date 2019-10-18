@@ -33,3 +33,4 @@ yarn-error.log*
 !.vscode/extensions.json
 JamDrive_Graph_client.code-workspace
 package-lock.json
+src/styles/tailwind.css
