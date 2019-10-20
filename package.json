@@ -28,6 +28,7 @@
     "react-router-dom": "^5.1.1",
     "react-scripts": "3.1.2",
     "styled-components": "^4.4.0",
+    "styled-theming": "^2.2.0",
     "subscriptions-transport-ws": "^0.9.16",
     "tailwindcss": "^1.1.2"
   },
@@ -57,6 +58,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "styled-components.macro": "^1.0.0"
   }
 }
