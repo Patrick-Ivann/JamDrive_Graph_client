@@ -80,7 +80,7 @@ export const useLogout = () => {
       localStorage.removeItem(process.env.REACT_APP_LOCAL_TOKEN)
       localStorage.removeItem(process.env.REACT_APP_LOCAL_REFRESH_TOKEN)
 
-      client.clearStore().then(() => client.resetStore()).catch((err)=> console.log(err));
+      client.clearStore().then(() =>   client.cache.writeData({data : defaults })).catch((err)=> console.log(err));
 
       console.log(client)
       client.onClearStore(()=>{

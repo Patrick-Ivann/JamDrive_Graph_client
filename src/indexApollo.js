@@ -18,7 +18,7 @@ import {
     ApolloProvider as ApolloHooksProvider
 } from 'react-apollo-hooks';
 import { resolvers } from './graphql/local/localResolvers';
-import { defaultLocalAppoloState } from "./graphql/local/defaultState";
+import { defaultLocalAppoloState, defaults } from "./graphql/local/defaultState";
 import { terminalLink } from './apolloLink';
 
 
@@ -32,11 +32,11 @@ const apolloCache = new InMemoryCache({
 
 
 persistCache({
-    cache:apolloCache,
+    cache: apolloCache,
     storage: window.localStorage,
 });
 
-defaultLocalAppoloState(apolloCache)
+// defaultLocalAppoloState(apolloCache)
 const client = new ApolloClient({
     cache: apolloCache,
     resolvers: resolvers,
@@ -60,15 +60,18 @@ const client = new ApolloClient({
 
 });
 
+apolloCache.writeData({ data: defaults });
+
 //initLocalState(apolloCache)
 
 
 
 
 
-ReactDOM.render( <ApolloProvider client = {client}>
-    <ApolloHooksProvider client = {
-        client
-    }>
-
-    <App /> </ApolloHooksProvider> </ApolloProvider> , document.getElementById('root'));
+ReactDOM.render(
+    <ApolloProvider client={client}>
+        <ApolloHooksProvider client={
+            client
+        }>
+            <App />
+        </ApolloHooksProvider> </ApolloProvider>, document.getElementById('root'));
