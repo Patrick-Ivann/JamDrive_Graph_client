@@ -7,7 +7,7 @@ import { LOCAL_FILTERSTORE_QUERY } from "../../graphql/local/localQueries";
 export default function PrositfFeedBloc() {
   const { client, data, error, loading, networkStatus, called } = useQuery(
     PROSIT_FEED_BY_CLASS,
-    { fetchPolicy: "network-only" }
+    { fetchPolicy: "cache-and-network" }
   );
 
   const {
