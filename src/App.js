@@ -14,9 +14,14 @@ import PrositfFeedBloc from "./component/PrositFeed/PrositfFeedBloc";
 import HeaderBloc from "./component/layout/HeaderBloc";
 import { useLogout } from "./graphql/handlers/authHandling";
 
-import { Container } from "./styles/layout";
+import { Container, MainBody } from "./styles/layout";
 import { LOCAL_THEMESTORE_QUERY } from "./graphql/local/localQueries";
 import ThemeProviderWrapper from "./styles/ThemeProviderWrapper";
+import Footer from "./component/layout/Footer";
+import Modal from "./component/common/Modal";
+import { useModal } from "./utils/customHooks";
+import Upload from "./component/PrositForm/Upload";
+import ModalMenu from "./component/common/ModalMenu";
 
 // function App({ client,
 //   data,
@@ -47,11 +52,12 @@ function App(props) {
   }, []);
 
   return (
-    <Router history={history}>
-
+    <MainBody>
+      <Router history={history}>
         <ThemeProviderWrapper>
           <Container>
             <HeaderBloc />
+
             <Route exact path="/" component={LoginIndex} />
             {/* <PrivateRoute currentUser={user} exact path='/prosits' component={PrositFeedIndex} /> */}
             <Switch>
@@ -60,10 +66,13 @@ function App(props) {
               {/* <PrivateRoute currentUser={user} exact path='/prositsAdmin'  component={PrositFeedIndex}/> */}
             </Switch>
             <Route exact path="/error-page/:error" component={Page} />
+            <Route exact path="/drop" component={Upload}></Route>
+            <Route exact path="/pop" component={ModalMenu}></Route>
           </Container>
         </ThemeProviderWrapper>
-      
-    </Router>
+      </Router>
+      <Footer />
+    </MainBody>
   );
 }
 
