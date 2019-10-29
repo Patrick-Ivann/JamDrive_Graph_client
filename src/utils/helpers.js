@@ -94,3 +94,11 @@ export const isFileRessourceEleve = spec => spec.toLowerCase() === "eleve";
  * @returns {Int} index
  */
 export const filterPrositByNomProsit = (currentProsit,filterWord) => currentProsit.nomProsit.toString().toLowerCase().indexOf(filterWord) > -1;
+
+/**
+ * 
+ * @param {String} currentProsit 
+ * @param {String} filterWord 
+ * @returns {Int} index
+ */
+export const filterPrositByMotClefProsit = (currentProsit,filterWord) => currentProsit.motsClef.toString().toLowerCase().indexOf(filterWord) > -1;
