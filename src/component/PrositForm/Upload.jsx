@@ -182,13 +182,17 @@ export default function Upload({ hide }) {
             className="w-full mx-auto my-8"
             onClick={event => {
               event.preventDefault(event);
-              Upload({
-                file: form.file,
-                title: form.file.name,
-                nomProsit: form.nomProsit,
-                unite: form.unite,
-                motsClef: form.motsClef
-              });
+              Upload(
+                {
+                  file: form.file,
+                  title: form.file.name,
+                  nomProsit: form.nomProsit,
+                  unite: form.unite,
+                  motsClef: form.motsClef
+                },
+                () => {},
+                hide
+              );
             }}
             type="submit"
           >
