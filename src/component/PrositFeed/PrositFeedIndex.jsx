@@ -12,7 +12,7 @@ import Modal from "../common/Modal";
 import { useModal } from "../../utils/customHooks";
 import { RoundedButtonAlt } from "../../styles/buttons";
 
-const PrositFeedIndex = ({ data, loading, error, filterStore = "" }) => {
+const PrositFeedIndex = ({ prosits, loading, error, filterStore = "" }) => {
   const [filtreState, setFiltre] = useState("");
   const { isShowing, toggle } = useModal();
 
@@ -30,16 +30,17 @@ const PrositFeedIndex = ({ data, loading, error, filterStore = "" }) => {
       <RoundedButtonAlt className="button-default" onClick={toggle}>
         Menu prosit
       </RoundedButtonAlt>
-      <ClickAwayListener onClickAway={() => isShowing && toggle()}>
-        <Modal isShowing={isShowing} hide={toggle}>
+      <Modal isShowing={isShowing} hide={toggle}>
+        <ClickAwayListener onClickAway={() => isShowing && toggle()}>
           <Upload hide={toggle}></Upload>
-        </Modal>
-      </ClickAwayListener>
-      {data.prositsByPromo
+        </ClickAwayListener>
+      </Modal>
+      {prosits
         .filter(prosit => filterPrositByNomProsit(prosit, filtreState))
         .map(prosit => {
           return (
             <PrositCardIndex
+              id={prosit._id}
               unite={prosit.unite}
               nomProsit={prosit.nomProsit}
               motsClef={prosit.motsClef}
