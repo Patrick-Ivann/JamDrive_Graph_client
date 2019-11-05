@@ -6,10 +6,7 @@ const ModalMenu = ({ isPoppedUp, show, children }) => {
   return (
     isPoppedUp && (
       <React.Fragment>
-        <StyledUl margin="-mt-32 ml-10">
-          <ListButton>supprimer</ListButton>
-          <ListButton>Telecharger Ressource</ListButton>
-        </StyledUl>
+        <StyledUl margin="-mt-32 ml-10">{children}</StyledUl>
       </React.Fragment>
     )
   );
