@@ -26,7 +26,7 @@ require('dotenv').config()
 
 
 const apolloCache = new InMemoryCache({
-    dataIdFromObject: e => `${e.__typename}_${e.id}` || null, // eslint-disable-line no-underscore-dangle
+    dataIdFromObject: o => {o.id ? `${o.__typename}-${o.id}`: `${o.__typename}-${o.cursor}`}, // eslint-disable-line
 
 })
 
@@ -41,7 +41,7 @@ const client = new ApolloClient({
     cache: apolloCache,
     resolvers: resolvers,
     link: terminalLink,
-    dataIdFromObject: o => o.id,
+    dataIdFromObject: o => {o.id ? `${o.__typename}-${o.id}`: `${o.__typename}-${o.cursor}`},// eslint-disable-line
     // defaultHttpLink: false,
     request: async operation => {
         console.log(operation)
