@@ -7506,6 +7506,10 @@ react-app-polyfill@^1.0.3:
     regenerator-runtime "0.13.3"
     whatwg-fetch "3.0.0"
 
+react-click-away-listener@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-click-away-listener/-/react-click-away-listener-0.3.0.tgz#fef3d571abf74226c7147c412e7974ca11be72b0"
+
 react-dev-utils@^9.0.4:
   version "9.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-9.0.4.tgz#5c71a8e8afdec0232c44d4e049d21baa437a92af"
@@ -8693,6 +8697,12 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
+tailwindcss-filters@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-filters/-/tailwindcss-filters-2.0.0.tgz#1a72c6c879fd95df403fb3e2d2eaf6b354ca7263"
+  dependencies:
+    lodash "^4.17.11"
+
 tailwindcss@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.1.2.tgz#0107dc092c3edee6132b105d896b109c0f66afd6"
@@ -8807,8 +8817,8 @@ tmp@^0.0.33:
     os-tmpdir "~1.0.2"
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
